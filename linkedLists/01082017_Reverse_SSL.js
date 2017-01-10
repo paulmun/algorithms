@@ -20,14 +20,15 @@ class SLL {
 
     //Iterates through SLL and stores a new Node() with the value taken in as a parameter. O(n)
 
-    add(val){
+    add(val){ //not really much to improve here
         var run = this.head;
+        //var newNode = new Node(val);
 
         if (run) {
             while (run.next) {
                 run = run.next;
             }
-            run.next = new Node(val);
+            run.next = new Node(val); // since new Node(val) is run in both cases you can initialize it earlier outside of the if statement
         } else {
             this.head = new Node(val);
         }
@@ -61,6 +62,7 @@ class SLL {
     revIt2(){
         var cur = this.head;
         var run = cur.next;
+        //if run.next, set sprint. this'll error if length == 2
         var sprint = run.next;
 
         while (run) {
@@ -82,7 +84,7 @@ class SLL {
 
     //Recursive solution to reversing the SLL.
 
-    revRec(node){
+    revRec(node){ //nice, just make sure you catch the base case; length == 0
 
         if (node && node.next) {
             this.revRec(node.next);
