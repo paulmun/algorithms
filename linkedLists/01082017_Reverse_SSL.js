@@ -1,4 +1,6 @@
-"use strict";
+'use strict';
+
+(function(){
 
 /* 
 January 8, 2017
@@ -11,88 +13,98 @@ Questions to ask Interviewer
 
 class SLL {
 
-    constructor(val){
-        this.head = new Node(val);
-        this.length = 1;
+    constructor(){
+        this.head = null;
+        this.length = 0;
     }
 
-    add(val){
     //Iterates through SLL and stores a new Node() with the value taken in as a parameter. O(n)
-        var c = this.head;
 
-        while(c.next){
-            var c = c.next;
+    add(val){
+        var run = this.head;
+
+        if (run) {
+            while (run.next) {
+                run = run.next;
+            }
+            run.next = new Node(val);
+        } else {
+            this.head = new Node(val);
         }
-
-        c.next = new Node(val);
+        
         this.length++;
     }
 
+    //Iterative solution to reversing the SLL. Implements an array to keep track of all Nodes in the list and iterates through the list backwards to move pointers in the opposite direciton. O(n)
+
     revIt(){
-    //Iterative solution to reversing the SLL. Implements an array to keep track of all Nodes in the list and iterates through the list backwards to move pointers in the opposite direciton. O(2n)
-        var l = [];
-        var c = this.head;
+        var list = [];
+        var run = this.head;
 
-        while(c.next){
-            l.push(c);
-            c = c.next;
+        while (run.next) {
+            list.push(run);
+            run = run.next;
         }
 
-        l.push(c);
+        list.push(run);
 
-        for(var i = this.length - 1; i >= 1; i--){
-            l[i].next = l[i-1];
+        for (var i = this.length - 1; i >= 1; i--) {
+            list[i].next = list[i-1];
         }
 
-        this.head = l[this.length-1];
-        l[0].next = null;
+        this.head = list[this.length-1];
+        list[0].next = null;
     }
 
-    revIt2(){
     //More efficient Iterative solution to  reversing the SLL.
-        var c = this.head;
-        var r = c.next;
-        var s = r.next;
 
-        while(r){
-            if(c && r){
-                r.next = c;
+    revIt2(){
+        var cur = this.head;
+        var run = cur.next;
+        var sprint = run.next;
+
+        while (run) {
+            if (cur) {
+                run.next = cur;
             }
 
-            c = r;
-            r = s;
+            cur = run;
+            run = sprint;
 
-            if(s){
-                s = s.next;
+            if (sprint) {
+                sprint = sprint.next;
             }
         }
 
         this.head.next = null;
-        this.head = c;
+        this.head = cur;
     }
 
-    revRec(node){
     //Recursive solution to reversing the SLL.
-        if(node && node.next){
+
+    revRec(node){
+
+        if (node && node.next) {
             this.revRec(node.next);
             node.next.next = node;
-        } else{
+        } else {
             this.head = node;
         }
 
-        if(node.next && node.next.next == node){
+        if (node.next && node.next.next == node) {
             node.next = null;
         }
 
     }
 
-    list(){
     //Prints the Nodes in the SLL in order starting from this.head. O(n) Placed in a separate method in order allow flexibility of printing the list from within any other method or independant of any other method.
-        var c = this.head;
 
-        while(c){
-            console.log(c);
-            c = c.next;
+    list(){
+        var cur = this.head;
+
+        while (cur) {
+            console.log(cur.val);
+            cur = cur.next;
         }
     }
 
@@ -107,7 +119,8 @@ class Node {
 
 }
 
-var sll = new SLL(1);
+var sll = new SLL();
+sll.add(1);
 sll.add(2);
 sll.add(3);
 sll.add(4);
@@ -129,3 +142,4 @@ sll.revIt2();
 sll.list();
 sll.revRec(sll.head);
 sll.list();
+})();
