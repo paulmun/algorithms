@@ -1,9 +1,8 @@
 'use strict';
 
-/* 
+/*
 January 8, 2017
 Reverse a Linked List
-
 Questions to ask Interviewer
     Is this a singly-linked or doubly-linked list?
     Am I allowed to use other data structures?
@@ -31,7 +30,7 @@ class SLL {
         } else {
             this.head = new Node(val);
         }
-        
+
         this.length++;
     }
 
