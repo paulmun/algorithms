@@ -1,7 +1,5 @@
 'use strict';
 
-(function(){
-
 /* 
 January 8, 2017
 Reverse a Linked List
@@ -10,6 +8,8 @@ Questions to ask Interviewer
     Is this a singly-linked or doubly-linked list?
     Am I allowed to use other data structures?
 */
+
+(function(){
 
 class SLL {
 
