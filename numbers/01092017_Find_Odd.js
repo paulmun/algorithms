@@ -1,3 +1,11 @@
+/**
+ * General Notes:
+ * 1. Why are you using tabs all of a sudden
+ * 2. Not everything needs to be class. Slliiiggghhhttt overkill for this one lol
+ * 3. This is a good solution, however a better one exists http://www.geeksforgeeks.org/find-the-number-occurring-odd-number-of-times/
+ * 		I didn't think this would be hard for you. You might want to do more than the ones I choose because I am doing this mainly for Steven and Jim
+ */
+
 'use strict';
 
 /*
@@ -47,7 +55,11 @@ class RNA {
 		var dict = {};
 		var i = this.numbers.length;
 
-		for(var j = 0; j < i; j++){
+		for(var j = 0; j < i; j++){ // what happened to spacing on this for loop? consistency!
+			// notice how you use "this.numbers[j]" three times, saving it into a variable is better
+			// in terms of speed, variable lookup is significantly* faster than object-key lookup
+			// * like. a lot a lot. in javascript, object-key lookups can be "very" slow, especially if it is nested.
+			// ("very" = relative to other stuff)
 			if (dict[this.numbers[j]]) {
 				dict[this.numbers[j]]++;
 			} else {
@@ -58,7 +70,7 @@ class RNA {
 		for (var num in dict) {
 			if (dict[num] % 2 != 0){
 				return num;
-			} 
+			}
 		}
 	}
 }
